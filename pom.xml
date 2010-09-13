@@ -4,12 +4,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
 >
+	<description>
+		NOTICE! Be aware that a dependency to Sun's tools.jar is a system dependency and
+		thus needs to be set accordingly if you are to compile this utility from the source.
+		In Sun's reference implementation (1.6) this artifact is called tools.jar but, for example,
+		on Mac OSX 10.6 needed classes are in classes.jar.
+		
+		Also, when running the utility the same artifact must be found from the class path, of course.
+	</description>
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hapiware.jmx</groupId>
 	<artifactId>startjmx</artifactId>
 	<version>1.0.0</version>
 	
 	<build>
+		<finalName>startjmx</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

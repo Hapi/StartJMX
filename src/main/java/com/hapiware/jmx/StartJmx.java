@@ -8,6 +8,15 @@ import com.sun.tools.attach.AgentLoadException;
 import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
 
+
+/**
+ * Starts a JMX agent of the target JVM on the run.
+ * </p>
+ * <b>NOTICE!</b> Works only on Java 1.6 or later.
+ * 
+ * @author hapi
+ *
+ */
 public class StartJmx
 {
 	private static final String LOCAL_CONNECTOR_ADDRES =
@@ -17,7 +26,7 @@ public class StartJmx
 	public static void main(String[] args)
 	{
 		if(args.length == 0 || args.length > 2)
-			usage();
+			usageAndExit(0);
 		
 		if(
 			args[0].equalsIgnoreCase("-?") ||
@@ -25,7 +34,7 @@ public class StartJmx
 			args[0].equalsIgnoreCase("-help") ||
 			args[0].equalsIgnoreCase("--help")
 		)
-			usage();
+			usageAndExit(0);
 		
 		try {
 			Integer pid = Integer.valueOf(args[0]);
@@ -43,7 +52,7 @@ public class StartJmx
 		}
 		catch(NumberFormatException ex) {
 			System.out.println(args[0] + " was not recognized as PID.");
-			usage();
+			usageAndExit(-1);
 		}
 		catch(AttachNotSupportedException e) {
 			e.printStackTrace();
@@ -60,9 +69,11 @@ public class StartJmx
 	}
 	
 	
-	private static void usage()
+	private static void usageAndExit(int status)
 	{
-		final String startjmx = "java -jar startjmx-1.0.0.jar";
+		final String startjmx = "java -jar startjmx.jar";
+		System.out.println("Description: Starts a JMX agent of the target JVM on the run. Works only on Java 1.6 or later.");
+		System.out.println();
 		System.out.println("Usage: " + startjmx + " [-? | -h | -help | --help]");
 		System.out.println("       " + startjmx + " PID [MANAGEMENTJAR]");
 		System.out.println();
@@ -71,12 +82,13 @@ public class StartJmx
 		System.out.println();
 		System.out.println("       MANAGEMENTJAR");
 		System.out.println("          Optional. A path to management-agent.jar.");
+		System.out.println("          Default is $JAVA_HOME/lib/management-agent.jar.");
 		System.out.println();
 		System.out.println("Examples:");
 		System.out.println("    " + startjmx + " -?");
 		System.out.println("    " + startjmx + " 50001");
 		System.out.println("    " + startjmx + " 50001 /usr/lib/jvm/jre-1.6.0-openjdk/lib/management-agent.jar");
 		System.out.println();
-		System.exit(0);
+		System.exit(status);
 	}
 }
