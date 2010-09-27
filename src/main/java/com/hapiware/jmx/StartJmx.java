@@ -36,6 +36,9 @@ public class StartJmx
 		)
 			usageAndExit(0);
 		
+		if(args[0].equalsIgnoreCase("--version"))
+			showVersionAndExit();
+		
 		try {
 			Integer pid = Integer.valueOf(args[0]);
 			VirtualMachine vm = VirtualMachine.attach(pid.toString());
@@ -68,13 +71,20 @@ public class StartJmx
 		}
 	}
 	
-	
+	private static void showVersionAndExit()
+	{
+		System.out.println(
+			"  Version: " + StartJmx.class.getPackage().getImplementationVersion()
+		);
+		System.exit(0);
+	}
+
 	private static void usageAndExit(int status)
 	{
 		final String startjmx = "java -jar startjmx.jar";
 		System.out.println("Description: Starts a JMX agent of the target JVM on the run. Works only on Java 1.6 or later.");
 		System.out.println();
-		System.out.println("Usage: " + startjmx + " [-? | -h | -help | --help]");
+		System.out.println("Usage: " + startjmx + " [-? | -h | -help | --help | --version]");
 		System.out.println("       " + startjmx + " PID [MANAGEMENTJAR]");
 		System.out.println();
 		System.out.println("       PID");

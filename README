@@ -1,6 +1,9 @@
 README - startjmx
 -----------------
 
+Usage: java -jar startjmx.jar [-? | -h | -help | --help | --version]
+       java -jar startjmx.jar PID [MANAGEMENTJAR]
+
 
 DESCRIPTION
 -----------

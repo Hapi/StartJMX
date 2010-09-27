@@ -16,7 +16,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hapiware.jmx</groupId>
 	<artifactId>startjmx</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	
 	<build>
 		<finalName>startjmx</finalName>
@@ -50,6 +50,11 @@
 						<manifest>
 							<mainClass>com.hapiware.jmx.StartJmx</mainClass>
 						</manifest>
+						<manifestEntries>
+							<Implementation-Title>${build.finalName}</Implementation-Title> 
+							<Implementation-Version>${project.version}</Implementation-Version>
+							<Implementation-Vendor>http://www.hapiware.com</Implementation-Vendor>
+						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
